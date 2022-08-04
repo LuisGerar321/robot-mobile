@@ -30,8 +30,9 @@ class PD_Controller {
 
 let serialCommunication;
 const wheel1Controll = new PD_Controller(0, 80.4, 22.2, 0.1);
+let manual = true;
 
-var msg = "";
+var msg = '{"motor1": 0}"'
 
 
 // const parser = serialCommunication.pipe(new ReadlineParser())
@@ -44,9 +45,10 @@ const listSerialPorts = async ()  => {
 const getSerialPort = async (microControllerName) => {
     try {
         const allSerialPorts = await SerialPort.list();
-        const serialPort =  allSerialPorts.find( (currentSerial) => currentSerial.manufacturer.toLocaleLowerCase().includes( microControllerName.toLocaleLowerCase()) && currentSerial.manufacturer !== "undefined");
+        const serialPort =  allSerialPorts.find( (currentSerial) => currentSerial?.manufacturer?.toLocaleLowerCase().includes( microControllerName.toLocaleLowerCase()) && currentSerial?.manufacturer !== "undefined");
         return serialPort;
     } catch (err) {
+        console.log("kiki");
         return err;
     }
 
@@ -74,8 +76,24 @@ const connectSerialPort = async (microControllerPORT) => {
 }
 
 const arduinoWrite = async (msg) => {
-    if (!serialCommunication) throw new Error(`There is not a Serial Connection`);
+    if (!serialCommunication) return new Error(`There is not a Serial Connection`);
     await serialCommunication.write(JSON.stringify(msg))
+
+    // //min +- 100;
+    // wheel1Controll.setPoint = msg.motor1;
+    // setInterval( async () => {
+    //     const uTMotor1 = wheel1Controll.Controll(arduinoRead().motor1.RPS);
+    //     const scaleUT = map(uTMotor1, 0, 255, 0, 10);
+
+    //     msg.motor1 = scaleUT;
+    //     console.log("The msg: ", msg);
+    //     await serialCommunication.write(JSON.stringify(msg));
+    // }, 100)
+}
+
+const arduinoWriteAutomatic = async (msg) => {
+    if (!serialCommunication) return new Error(`There is not a Serial Connection`);
+    await serialCommunication.write(JSON.stringify(msg));
 
     // //min +- 100;
     // wheel1Controll.setPoint = msg.motor1;

@@ -19,8 +19,8 @@ const PORT = config.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use("/api/arduino", serialPort);
-app.get("/api/", (req, res) => {res.status(200).send({status: 200, message: "ok", data:{}})});
+app.get("/api/", serialPort);
 
 app.listen(PORT, () => {
-  console.log(`API is listening on port ${PORT}`);
+  console.log(`API is listening on port: ${PORT}`);
 });

@@ -1,6 +1,7 @@
-require("dotenv").config();
-
 const path = require("path");
+require("dotenv").config()
+
+
 
 const config = {
     root: path.normalize(`${__dirname}/..`),
