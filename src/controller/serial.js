@@ -12,10 +12,10 @@ const {
   } = require("../services/arduinoCommunication");
 
 const readSerial =  (req, res) => {
-    console.log("get: arduino/");
-    if (!connection) {
-        return res.status(500).send({status: 500, message: "Can not get serial because not connection", data: {}});
-    }
+    // console.log("get: arduino/");
+    // if (!connection) {
+    //     return res.status(500).send({status: 500, message: "Can not get serial because not connection", data: {}});
+    // }
     const readSerial = arduinoRead();
     
     res.status(200).send({status: 200, message: "You got a message", data: readSerial});

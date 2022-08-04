@@ -32,7 +32,7 @@ let serialCommunication;
 const wheel1Controll = new PD_Controller(0, 80.4, 22.2, 0.1);
 let manual = true;
 
-var msg = '{"motor1": 0}"'
+var msg = '{"motor1": 0}'
 
 
 // const parser = serialCommunication.pipe(new ReadlineParser())
@@ -108,7 +108,7 @@ const arduinoWriteAutomatic = async (msg) => {
 }
 
 const arduinoRead = () => {
-    if (!serialCommunication) throw new Error(`There is not a Serial Connection`);
+    // if (!serialCommunication) throw new Error(`There is not a Serial Connection`);
     return JSON.parse(msg);
 }
 

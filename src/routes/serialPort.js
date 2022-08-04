@@ -3,12 +3,13 @@ const { writeSerial, readSerial, readInfoSerial, connectSerial, listAllSerial,PD
 
 const router = express.Router();
 
-router.get("/", readSerial);
+
 router.get("/config/serialPort", readInfoSerial);
 router.get("/config/listSerialPorts", listAllSerial);
 
 router.get("/config/connectSerialPort", connectSerial);
 router.post("/",writeSerial);
+router.get("/", readSerial);
 // router.post("/", PD_Controll);
 
 
